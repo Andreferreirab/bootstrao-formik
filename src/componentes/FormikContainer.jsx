@@ -14,7 +14,6 @@ function FormikContainer() {
     const validationSchema = Yup.object({
         teste: Yup.string().required('Campo obrigatório'),
         beginDate: Yup.date().required('Campo Obrigatório').nullable()
-
     })
 
     function onSubmit (values) {

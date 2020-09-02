@@ -8,7 +8,7 @@ function FormikControl (props) {
         case 'input':
             return <Input {...rest} />
         case 'date':
-            return <DatePicker />
+            return <DatePicker {...rest} />
         default:
             return null
     }
