@@ -10,25 +10,27 @@ function FormikContainer() {
         teste: '',
         beginDate: null,
         beginTime: null,
-        selection: [],
+        multiSelection: [],
+        singleSelection: ''
     }
 
     const validationSchema = Yup.object({
         teste: Yup.string().required('Campo obrigatório'),
         beginDate: Yup.date().required('Campo Obrigatório').nullable(),
         beginTime: Yup.date().required('Campo Obrigatório').nullable(),
-        selection: Yup.array().required('Campo Obrigatório')
+        multiSelection: Yup.array().required('Campo Obrigatório'),
+        singleSelection: Yup.string().required('Campo Obrigatório')
     })
 
     const selectOptions = [
-        {value: 'Option 1', label: 'Opção 1'},
-        {value: 'Option 2', label: 'Opção 2'},
-        {value: 'Option 3', label: 'Opção 3'},
-        {value: 'Option 4', label: 'Opção 4'},
+        { value: 'Option 1', label: 'Opção 1' },
+        { value: 'Option 2', label: 'Opção 2' },
+        { value: 'Option 3', label: 'Opção 3' },
+        { value: 'Option 4', label: 'Opção 4' },
     ]
 
     function onSubmit(values) {
-        
+
         console.log(values)
     }
 
@@ -63,14 +65,22 @@ function FormikContainer() {
                         timeCaption="Hora"
                         dateFormat="h:mm aa"
                     />
-
-                    <FormikControl 
+                    <FormikControl
                         control='select'
-                        name='selection'
+                        name='multiSelection'
                         label='Seletor'
                         options={selectOptions}
                         placeholder='Selecione o professor da disciplina...'
                         isMulti={true}
+                    />
+                    <FormikControl
+                        control='select'
+                        name='singleSelection'
+                        label='Seletor'
+                        options={selectOptions}
+                        placeholder='Selecione o professor da disciplina...'
+                        isMulti={false}
+                        isClearable={true}
                     />
                     <Button type='submit'>Submit</Button>
                 </Form>

@@ -22,10 +22,13 @@ function SelectForm(props) {
         <div style={{ "marginBottom": "1rem" }}>
             <Field name={name}>
                 {({ form, field }) => {
-                    const { setFieldValue } = form
+                    const { setFieldValue, setFieldTouched } = form
                     const { value } = field
 
                     const onChange = (option) => {
+                        if (option === null) {
+                            option = []
+                        }
                         setFieldValue(
                             name,
                             isMulti
@@ -33,6 +36,10 @@ function SelectForm(props) {
                                 : option.value
                         );
                     };
+
+                    const onBlur = () => {
+                        setFieldTouched(name)
+                    }
 
                     const getValue = () => {
                         if (options) {
@@ -53,6 +60,7 @@ function SelectForm(props) {
                                 {...rest}
                                 {...field}
                                 onChange={onChange}
+                                onBlur={onBlur}
                                 value={getValue()}
                                 isMulti={isMulti}
                             />
@@ -61,6 +69,7 @@ function SelectForm(props) {
                 }}
             </Field>
             <ErrorMessage component={ErrorMessageContainer} name={name} />
+
         </div>
     );
 }
